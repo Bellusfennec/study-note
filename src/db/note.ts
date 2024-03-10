@@ -1,0 +1,14 @@
+import { db } from "./index";
+import notes from "../mocks/notes.json";
+
+export async function populate() {
+  // await db.notes.bulkAdd(
+  //   [
+  //   {
+  //     id: "1",
+  //     title: "заголовок 1",
+  //     content: "# Marked in Node.js\n\nRendered by **marked**.",
+  //     updatedAt: "2024-03-09T04:22:52.322Z",
+  //   },
+  // ]);
+}
