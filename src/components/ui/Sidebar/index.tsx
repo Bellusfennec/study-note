@@ -1,9 +1,13 @@
 import { AppShell, ScrollArea, Skeleton } from "@mantine/core";
 import { useNote } from "../../../contexts/NoteProvider";
 import { ListItem } from "../ListItem";
+import { db } from "../../../db";
+import { useLiveQuery } from "dexie-react-hooks";
 
 export const Sidebar = () => {
   const { noteList, createNote } = useNote();
+  const lists = useLiveQuery(() => db.notes.toArray());
+  console.log("lists", lists);
 
   if (noteList.length === 0) {
     return (
@@ -19,7 +23,7 @@ export const Sidebar = () => {
 
   return (
     <AppShell.Section grow my="md" component={ScrollArea}>
-      <ListItem note={{ id: "0", title: "Новая заметка", content: "", updatedAt: "" }} onClick={createNote} />
+      <ListItem note={{ id: 0, title: "Новая заметка", content: "", updatedAt: "" }} onClick={createNote} />
       {noteList.map((note) => (
         <ListItem key={note.id} note={note} />
       ))}

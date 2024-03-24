@@ -11,10 +11,11 @@ interface ListItemProps {
 export const ListItem = (props: ListItemProps) => {
   const { note, onClick } = props;
   const { setSelectedNoteId, selectedNoteId } = useNote();
-  console.log(selectedNoteId, note.id, selectedNoteId === note.id, note.title);
+  // console.log(selectedNoteId, note.id, selectedNoteId === note.id, note.title);
 
   return (
     <Box w={250}>
+      {/* @ts-ignore */}
       <UnstyledButton onClick={() => (onClick ? onClick() : setSelectedNoteId(note.id))}>
         {note.title} <br />
         <Box w={250}>

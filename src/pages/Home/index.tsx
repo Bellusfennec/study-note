@@ -4,9 +4,11 @@ import { useDisclosure } from "@mantine/hooks";
 import NavControl from "../../components/ui/NavControl";
 import { Sidebar } from "../../components/ui/Sidebar";
 import { Workspace } from "../../components/ui/Workspace";
+import { initDataDB } from "../../db";
 
 export const Home = () => {
   const [opened, { toggle }] = useDisclosure();
+  initDataDB();
 
   return (
     <>

@@ -20,10 +20,11 @@ export const useNote = () => {
 };
 
 const NoteProvider = ({ children }: any) => {
+  // @ts-ignore
   const [noteList, setNoteList] = React.useState<Note[]>(notes || []);
   const [searchText, setSearchText] = React.useState<string>("");
   const [isEditMode, setEditMode] = React.useState<boolean>(false);
-  const [selectedNoteId, setSelectedNoteId] = React.useState<string | null>(null);
+  const [selectedNoteId, setSelectedNoteId] = React.useState<number | null>(null);
   const searchData = searchText
     ? noteList.filter((note) => note.content.toLowerCase().includes(searchText.toLowerCase()))
     : noteList;
@@ -34,10 +35,11 @@ const NoteProvider = ({ children }: any) => {
   });
 
   const createNote = () => {
-    let id = null as string | null;
+    let id = null as number | null;
+    // @ts-ignore
     setNoteList((state) => {
       const filteredEmpty = state.filter((note) => !(note.title === "Новая заметка" && note.content === ""));
-      id = (filteredEmpty.length + 1).toString();
+      id = filteredEmpty.length + 1;
       const newNote = { id, title: "Новая заметка", content: "", updatedAt: new Date().toISOString() };
       return [...filteredEmpty, newNote];
     });

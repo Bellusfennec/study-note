@@ -1,14 +1,15 @@
-import { db } from "./index";
-import notes from "../mocks/notes.json";
+import noteList from "../mocks/notes.json";
+import { NoteDB, db } from "./index";
 
 export async function populate() {
-  // await db.notes.bulkAdd(
-  //   [
-  //   {
-  //     id: "1",
-  //     title: "заголовок 1",
-  //     content: "# Marked in Node.js\n\nRendered by **marked**.",
-  //     updatedAt: "2024-03-09T04:22:52.322Z",
-  //   },
-  // ]);
+  console.log("Populating notes...");
+
+  await db.notes
+    .bulkAdd(noteList)
+    .then(function (lastKey) {
+      console.log("All notes added successfully. Last key:", lastKey);
+    })
+    .catch(NoteDB.BulkError, function (e) {
+      console.error("Some notes did not succeed. Error:", e);
+    });
 }

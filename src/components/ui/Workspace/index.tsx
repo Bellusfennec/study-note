@@ -2,18 +2,19 @@
 import { Space, TextInput, Textarea } from "@mantine/core";
 import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
-import { Note } from "../../../types";
 import { useNote } from "../../../contexts/NoteProvider";
-import React from "react";
+import { Note } from "../../../types";
 
 export const Workspace = () => {
   const { noteList, setNoteList, isEditMode, selectedNoteId } = useNote();
+  // @ts-ignore
   const currentNote = noteList.find((note) => note.id === selectedNoteId) || null;
   const content = marked.parse(currentNote?.content || "") || "";
 
   const handlerChange = (e: any) => {
     const { name, value } = e.currentTarget;
     setNoteList((state) => {
+      // @ts-ignore
       const index = state.findIndex((note) => note.id === selectedNoteId);
       const newState: Note[] = [...state];
       if (name === "title") {

@@ -1,12 +1,13 @@
 import Dexie, { Table } from "dexie";
+import { populate } from "./note";
 
 export interface Note {
   id?: number;
   title: string;
-  content: number;
+  content: string;
 }
 
-export class MySubClassedDexie extends Dexie {
+export class NoteDB extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
   notes!: Table<Note>;
@@ -19,4 +20,8 @@ export class MySubClassedDexie extends Dexie {
   }
 }
 
-export const db = new MySubClassedDexie();
+export const db = new NoteDB();
+
+export const initDataDB = () => {
+  db.on("populate", populate);
+};
