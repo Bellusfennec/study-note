@@ -2,7 +2,7 @@ import { Container, Flex } from "@mantine/core";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { SignIn } from "../../components/ui/SignIn";
 import { SignUp } from "../../components/ui/SignUp";
-import { useAuth } from "../../contexts/AuthProvider";
+import { DataSignIn, useAuth } from "../../contexts/AuthProvider";
 // import { use } from "marked";
 
 export const Auth = () => {
@@ -13,8 +13,7 @@ export const Auth = () => {
   const from = location.state?.from || "/";
   const auth = useAuth();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handlerSubmit = (data: any) => {
+  const handlerSubmit = (data: DataSignIn) => {
     if (auth && auth?.signIn) {
       auth?.signIn(data, () => {
         navigate(from, { replace: true });

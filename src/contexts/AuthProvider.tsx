@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, MouseEventHandler, useContext, useEffect, useState } from "react";
 import { db } from "../db";
 // import { use } from "marked";
 
@@ -6,7 +6,7 @@ type User = null | string;
 interface AuthContextValue {
   user: User;
   signIn?: SignIn;
-  signOut?: any;
+  signOut?: MouseEventHandler<HTMLButtonElement>;
   isAuth: boolean;
   isLoading: boolean;
 }
@@ -16,13 +16,12 @@ interface AuthProviderProps {
 interface SignIn {
   (data: DataSignIn, callback?: () => void): void;
 }
-interface DataSignIn {
+interface SignOut {
+  (callback?: (e: MouseEventHandler<HTMLButtonElement>) => void): void;
+}
+export interface DataSignIn {
   email: string;
   password: string;
-}
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface SignOut {
-  (callback?: () => void): void;
 }
 
 const AuthContext = createContext<AuthContextValue>({ user: null, isAuth: false, isLoading: true });
@@ -47,13 +46,10 @@ const AuthProvider = (props: AuthProviderProps) => {
       }
     });
   };
-  const signOut: any = (callback: any) => {
+  const signOut = () => {
     setUser(null);
     localStorage.removeItem("user");
     setAuth(false);
-    if (typeof callback === "function") {
-      callback?.();
-    }
   };
 
   const getUser = async () => {

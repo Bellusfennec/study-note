@@ -10,16 +10,11 @@ interface ListItemProps {
 
 export const ListItem = (props: ListItemProps) => {
   const { note, createNote } = props;
-  const {
-    setSelectedNoteId,
-    // selectedNoteId
-  } = useNote();
-  // console.log(selectedNoteId, note.id, selectedNoteId === note.id, note.title);
+  const { setSelectedNoteId } = useNote();
 
   return (
     <Box w={250}>
-      {/* @ts-ignore */}
-      <UnstyledButton onClick={() => (createNote ? createNote() : setSelectedNoteId(note.id))}>
+      <UnstyledButton onClick={() => (createNote ? createNote() : setSelectedNoteId(note.id || null))}>
         <Box w={250}>
           <Text truncate="end">{note.title}</Text>
         </Box>

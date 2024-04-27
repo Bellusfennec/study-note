@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { db } from "../db";
 import { Note } from "../types";
-// import { use } from "marked";
 
+interface NoteProviderProps {
+  children: React.ReactNode;
+}
 interface NoteContextProps {
   noteList: Note[];
   setNoteList: React.Dispatch<React.SetStateAction<Note[]>>;
@@ -22,8 +24,7 @@ export const useNote = () => {
   return useContext(NoteContext) as NoteContextProps;
 };
 
-const NoteProvider = ({ children }: any) => {
-  // @ts-ignore
+const NoteProvider = ({ children }: NoteProviderProps) => {
   const [noteList, setNoteList] = React.useState<Note[]>([]);
   const [searchText, setSearchText] = React.useState<string>("");
   const [isEditMode, setEditMode] = React.useState<boolean>(false);
@@ -31,7 +32,7 @@ const NoteProvider = ({ children }: any) => {
   const searchData = searchText
     ? noteList.filter((note) => note.content.toLowerCase().includes(searchText.toLowerCase()))
     : noteList;
-  const sortedData = [...searchData].sort((a: any, b: any) => {
+  const sortedData = [...searchData].sort((a: Note, b: Note) => {
     const aa = +new Date(a.updatedAt).getTime();
     const bb = +new Date(b.updatedAt).getTime();
     return bb - aa;
