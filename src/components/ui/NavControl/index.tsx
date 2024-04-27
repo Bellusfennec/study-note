@@ -1,7 +1,6 @@
 import { Button, Flex, TextInput } from "@mantine/core";
-import { useNote } from "../../../contexts/NoteProvider";
-import { db } from "../../../db";
 import { useAuth } from "../../../contexts/AuthProvider";
+import { useNote } from "../../../contexts/NoteProvider";
 
 const NavControl = () => {
   const { isEditMode, setEditMode, setSearchText, searchText } = useNote();

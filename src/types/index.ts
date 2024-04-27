@@ -1,5 +1,7 @@
+import { DataSignIn } from "../contexts/AuthProvider";
+
 export interface UserSignIn {
-  onSubmit: (event: any) => void;
+  onSubmit: (event: DataSignIn) => void;
 }
 export interface ObjectData {
   [key: string]: string;
