@@ -10,7 +10,7 @@ const PrivateRoute = (props: PrivateRouteProps) => {
   const auth = useAuth();
   const location = useLocation();
 
-  if (auth?.user === null) {
+  if (auth?.user === null || auth?.user === undefined) {
     return <Navigate to="/auth" state={{ from: location.pathname }} replace />;
   }
 

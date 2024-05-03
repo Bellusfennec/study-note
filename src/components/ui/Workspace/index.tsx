@@ -44,6 +44,7 @@ export const Workspace = () => {
     return (
       <>
         <h1>{currentNote?.title}</h1>
+        {/* dangerouslySetInnerHTML особенность библиотеки, в примерах работы в react так и показывается */}
         {markup && <div dangerouslySetInnerHTML={markup} />}
       </>
     );

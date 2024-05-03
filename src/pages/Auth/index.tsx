@@ -12,20 +12,19 @@ export const Auth = () => {
   const navigate = useNavigate();
   const from = location.state?.from || "/";
   const auth = useAuth();
+  const signInElement = <SignIn onSubmit={handlerSubmit} />;
+  const signUpElement = <SignUp onSubmit={handlerSubmit} />;
 
-  const handlerSubmit = (data: DataSignIn) => {
+  function handlerSubmit(data: DataSignIn) {
     if (auth && auth?.signIn) {
-      auth?.signIn(data, () => {
-        navigate(from, { replace: true });
-      });
+      auth?.signIn(data, () => navigate(from, { replace: true }));
     }
-  };
+  }
 
   return (
     <Flex mih="100vh" miw="100%" justify="center" align="center">
       <Container size="md" w="440px">
-        {page === "login" && <SignIn onSubmit={handlerSubmit} />}
-        {page === "registration" && <SignUp onSubmit={handlerSubmit} />}
+        {page === "login" ? signInElement : signUpElement}
       </Container>
     </Flex>
   );

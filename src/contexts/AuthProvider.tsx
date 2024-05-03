@@ -16,15 +16,13 @@ interface AuthProviderProps {
 interface SignIn {
   (data: DataSignIn, callback?: () => void): void;
 }
-interface SignOut {
-  (callback?: (e: MouseEventHandler<HTMLButtonElement>) => void): void;
-}
 export interface DataSignIn {
   email: string;
   password: string;
 }
+const initialContext = { user: null, isAuth: false, isLoading: true };
 
-const AuthContext = createContext<AuthContextValue>({ user: null, isAuth: false, isLoading: true });
+const AuthContext = createContext<AuthContextValue>(initialContext);
 
 export const useAuth = () => {
   return useContext(AuthContext);

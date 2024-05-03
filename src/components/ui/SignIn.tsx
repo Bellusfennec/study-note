@@ -3,14 +3,14 @@ import { useForm } from "@mantine/form";
 import { useSearchParams } from "react-router-dom";
 import { UserSignIn } from "../../types";
 
+const initialValues = {
+  email: "",
+  password: "",
+};
+
 export const SignIn = (props: UserSignIn) => {
   const { onSubmit } = props;
-  const form = useForm({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-  });
+  const form = useForm({ initialValues });
 
   const [, setParams] = useSearchParams();
 
